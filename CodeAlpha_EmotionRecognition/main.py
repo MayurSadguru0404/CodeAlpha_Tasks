@@ -35,7 +35,7 @@ class EmotionRecognitionSystem:
             mfcc_delta = librosa.feature.delta(mfcc)
             mfcc_delta2 = librosa.feature.delta(mfcc, order=2)
             combined = np.vstack([mfcc, mfcc_delta, mfcc_delta2])
-            # Pad or truncate
+            
             if combined.shape[1] > self.max_pad_len:
                 combined = combined[:, :self.max_pad_len]
             else:
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     history = ers.train_model(X_train, y_train, X_val, y_val, epochs=50)
     ers.evaluate_model(X_test, y_test)
 
-    # Test single audio
     test_audio = r"C:\complete web development\Code_Alpha_Tasks\CodeAlpha_EmotionRecognition\datasets\RAVDESS\Actor_02\03-01-01-01-01-01-02.wav"
     emotion, conf = ers.predict_emotion(test_audio)
     print(f"\nPredicted Emotion: {emotion} with confidence {conf:.2f}")
+
